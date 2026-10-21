@@ -73,7 +73,25 @@ Dependency Injection wird separat aufgelöst (.NET-Registrierungen, NestJS/Angul
 
 ## Installation
 
-Kopiere die Ordner unter `skills/` in das Skills-Verzeichnis deines Agents (zum Beispiel `~/.claude/skills/` oder `<repo>/.claude/skills/`) oder lade die `.skill`-Pakete hoch. Bitte dann um ein Architektur-Audit eines Repositorys oder rufe `/re-arch-audit` auf.
+**Claude Code** (ein Schritt, Claude Code 2.1.275 oder neuer):
+
+```
+/plugin install re-arch --marketplace GregoryBabonaux/re-arch
+```
+
+Ältere Versionen: `/plugin marketplace add GregoryBabonaux/re-arch`, danach `/plugin install re-arch@re-arch`.
+
+**Jeder andere Agent** (Codex, Cursor, Gemini, Copilot…):
+
+```
+npx skills add GregoryBabonaux/re-arch
+```
+
+Mit `-g` installierst du es für alle deine Projekte.
+
+Danach im zu prüfenden Projekt einfach fragen: *„Auditiere die Architektur dieses Repositorys“*.
+
+Aktualisieren: `claude plugin update re-arch@re-arch` (Claude Code) oder `npx skills update`.
 
 ## Entwicklung
 

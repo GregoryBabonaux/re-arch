@@ -1,0 +1,10 @@
+{
+  "name": "re-arch",
+  "version": "0.1.0",
+  "description": "Architecture audit of an existing codebase (vibe-coded ones included): domain map, evidence-backed findings, sized target options, refactoring plan, management pitch, AI guardrails, training material, HTML report and OKF bundle.",
+  "author": {
+    "name": "Grégory Babonaux"
+  },
+  "repository": "https://github.com/GregoryBabonaux/re-arch",
+  "keywords": ["architecture", "audit", "refactoring", "vibe-coding", "fitness-functions", "skills"]
+}

@@ -73,7 +73,25 @@ La inyección de dependencias se resuelve por separado (registros de .NET, provi
 
 ## Instalación
 
-Copia las carpetas de `skills/` en el directorio de skills de tu agente (por ejemplo `~/.claude/skills/` o `<repo>/.claude/skills/`), o sube los paquetes `.skill`. Después pide una auditoría de arquitectura de un repositorio, o invoca `/re-arch-audit`.
+**Claude Code** (un solo paso, Claude Code 2.1.275 o posterior):
+
+```
+/plugin install re-arch --marketplace GregoryBabonaux/re-arch
+```
+
+Versiones anteriores: `/plugin marketplace add GregoryBabonaux/re-arch` y luego `/plugin install re-arch@re-arch`.
+
+**Cualquier otro agente** (Codex, Cursor, Gemini, Copilot…):
+
+```
+npx skills add GregoryBabonaux/re-arch
+```
+
+Añade `-g` para instalarlo en todos tus proyectos.
+
+Después, en el proyecto que quieres auditar, pide simplemente: *"audita la arquitectura de este repositorio"*.
+
+Actualizar: `claude plugin update re-arch@re-arch` (Claude Code) o `npx skills update`.
 
 ## Desarrollo
 

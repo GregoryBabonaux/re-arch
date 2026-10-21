@@ -73,7 +73,25 @@
 
 ## 安装
 
-将 `skills/` 下的目录复制到智能体的技能目录（例如 `~/.claude/skills/` 或 `<repo>/.claude/skills/`），或上传 `.skill` 包。然后请求对某个仓库进行架构审计，或直接调用 `/re-arch-audit`。
+**Claude Code**（一步完成，需 Claude Code 2.1.275 或更高版本）：
+
+```
+/plugin install re-arch --marketplace GregoryBabonaux/re-arch
+```
+
+较早的版本：先运行 `/plugin marketplace add GregoryBabonaux/re-arch`，再运行 `/plugin install re-arch@re-arch`。
+
+**其他任何智能体**（Codex、Cursor、Gemini、Copilot 等）：
+
+```
+npx skills add GregoryBabonaux/re-arch
+```
+
+加上 `-g` 可为所有项目安装。
+
+然后在要审计的项目中直接提问：*“审计这个仓库的架构”*。
+
+更新：`claude plugin update re-arch@re-arch`（Claude Code）或 `npx skills update`。
 
 ## 开发
 

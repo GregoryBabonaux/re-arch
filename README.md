@@ -73,7 +73,25 @@ Dependency injection is resolved separately (.NET registrations, NestJS/Angular 
 
 ## Install
 
-Copy the folders under `skills/` into your agent's skills directory (for example `~/.claude/skills/` or `<repo>/.claude/skills/`), or upload the `.skill` packages. Then ask for an architecture audit of a repository, or invoke `/re-arch-audit`.
+**Claude Code** (one step, Claude Code 2.1.275 or later):
+
+```
+/plugin install re-arch --marketplace GregoryBabonaux/re-arch
+```
+
+Older versions: `/plugin marketplace add GregoryBabonaux/re-arch`, then `/plugin install re-arch@re-arch`.
+
+**Any other agent** (Codex, Cursor, Gemini, Copilot…):
+
+```
+npx skills add GregoryBabonaux/re-arch
+```
+
+Add `-g` to install it for all your projects.
+
+Then, in the project to audit, just ask: *"audit the architecture of this repository"*.
+
+Update: `claude plugin update re-arch@re-arch` (Claude Code) or `npx skills update`.
 
 ## Development
 

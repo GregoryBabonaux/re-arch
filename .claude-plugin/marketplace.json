@@ -1,0 +1,15 @@
+{
+  "name": "re-arch",
+  "owner": {
+    "name": "Grégory Babonaux"
+  },
+  "description": "re-arch: architecture audit and refactoring skills for coding agents.",
+  "plugins": [
+    {
+      "name": "re-arch",
+      "source": "./",
+      "description": "Audits the architecture of an existing codebase and plans a refactoring the team can actually carry out.",
+      "version": "0.1.0"
+    }
+  ]
+}

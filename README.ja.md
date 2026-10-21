@@ -73,7 +73,25 @@
 
 ## インストール
 
-`skills/` 配下のフォルダをエージェントのスキルディレクトリ (たとえば `~/.claude/skills/` や `<repo>/.claude/skills/`) にコピーするか、`.skill` パッケージをアップロードしてください。その後、リポジトリのアーキテクチャ監査を依頼するか、`/re-arch-audit` を呼び出します。
+**Claude Code**（1 ステップ、Claude Code 2.1.275 以降）：
+
+```
+/plugin install re-arch --marketplace GregoryBabonaux/re-arch
+```
+
+それより前のバージョンでは、`/plugin marketplace add GregoryBabonaux/re-arch` を実行してから `/plugin install re-arch@re-arch` を実行します。
+
+**その他のエージェント**（Codex、Cursor、Gemini、Copilot など）：
+
+```
+npx skills add GregoryBabonaux/re-arch
+```
+
+`-g` を付けると、すべてのプロジェクトにインストールされます。
+
+あとは監査したいプロジェクトで「このリポジトリのアーキテクチャを監査して」と頼むだけです。
+
+更新：`claude plugin update re-arch@re-arch`（Claude Code）または `npx skills update`。
 
 ## 開発
 
