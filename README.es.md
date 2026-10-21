@@ -2,6 +2,8 @@
 
 [English](README.md) | [Français](README.fr.md) | **Español** | [Deutsch](README.de.md) | [Português](README.pt-BR.md) | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 
+![Informe de re-arch: resumen y mapa de dominios](docs/images/banner.png)
+
 Un conjunto de skills para agentes que audita la arquitectura de una aplicación existente, propone arquitecturas objetivo dimensionadas según lo que cuesta entenderlas y construirlas, planifica el refactoring, presenta el caso a la dirección, encuadra a los agentes de programación con IA y la CI en torno al objetivo elegido, y genera material de formación basado en el propio código del equipo. Pensado para cualquier codebase, y en especial para las vibe-coded o generadas por IA.
 
 Ecosistemas soportados: JavaScript / TypeScript, PHP, .NET (C#), Java / Kotlin, C / C++, Go, Rust.
@@ -20,6 +22,26 @@ Ejecuta `re-arch-audit` sobre un repositorio y obtienes, en `.re-arch/`:
 - un **informe HTML responsive** que lo reúne todo, validado contra el contrato de datos y comprobado a ancho de móvil, imprimible en PDF, más diagramas Mermaid para la documentación del repo;
 - un **bundle [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2)** con el conocimiento de arquitectura (sistema, dominios, sistemas externos, decisión, reglas, roadmap, historial), para hacer commit en `docs/architecture/okf/` destinado a personas, agentes de programación y catálogos de conocimiento; los campos de confianza indican lo que el equipo ha validado, y el contenido sensible queda fuera;
 - **re-auditorías** que muestran lo que se ha resuelto, lo que es nuevo y cómo han evolucionado las métricas.
+
+## Ejemplo de informe
+
+Generado por re-arch sobre *Factureo*, una app de facturación ficticia hecha con vibe coding para las evals (el informe está en francés). [Descarga el informe completo](docs/example/report-factureo.html) y ábrelo en un navegador.
+
+**Mapa de dominios**: dominios de negocio y sus dependencias, dependencias mutuas en naranja.
+
+![Mapa de dominios](docs/images/domain-map.png)
+
+**Opciones**: de 2 a 4 arquitecturas objetivo, cada una dimensionada en coste de comprensión y tamaño de implementación, evaluadas frente a los escenarios de calidad del negocio.
+
+![Opciones](docs/images/options.png)
+
+**Plan**: fases con su tamaño, criterios de salida, rollback y puntos de parada.
+
+![Plan](docs/images/plan.png)
+
+**En el móvil**: cada pestaña se comprueba a 390 px de ancho.
+
+![En el móvil](docs/images/mobile.png)
 
 ## Skills
 

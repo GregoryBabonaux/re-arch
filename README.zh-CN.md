@@ -2,6 +2,8 @@
 
 [English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [Português](README.pt-BR.md) | [Italiano](README.it.md) | **简体中文** | [日本語](README.ja.md)
 
+![re-arch 报告：摘要和领域地图](docs/images/banner.png)
+
 一套智能体技能（agent skill），用于审计现有应用的架构，提出按理解成本与实施成本评估的目标架构，规划重构，向管理层论证方案，围绕选定的目标架构约束 AI 编码智能体与 CI，并基于团队自己的代码生成培训材料。适用于任何代码库，尤其适合氛围编程（vibe coding）或 AI 生成的代码库。
 
 支持的技术生态：JavaScript / TypeScript、PHP、.NET (C#)、Java / Kotlin、C / C++、Go、Rust。
@@ -20,6 +22,26 @@
 - 一份汇总所有内容的**响应式 HTML 报告**，已通过数据契约校验并在手机宽度下检查过渲染效果，可打印为 PDF，另附可放入仓库文档的 Mermaid 图；
 - 一个包含架构知识（系统、领域、外部系统、决策、规则、路线图、历史）的 **[Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2) 包**，可提交到 `docs/architecture/okf/` 下，供开发者、编码智能体和知识目录使用；信任字段标明哪些内容已经过团队确认，敏感内容不会包含在内；
 - **复审**，展示哪些问题已解决、哪些是新出现的，以及各项指标的变化。
+
+## 报告示例
+
+由 re-arch 为 *Factureo* 生成。Factureo 是为评测编写的一个虚构的 vibe coding 发票应用（报告为法语）。[下载完整报告](docs/example/report-factureo.html)，在浏览器中打开。
+
+**领域地图**：业务领域及其依赖关系，相互依赖以橙色显示。
+
+![领域地图](docs/images/domain-map.png)
+
+**方案**：2 到 4 个目标架构，每个都按理解成本和实施规模评估，并对照业务的质量场景打分。
+
+![方案](docs/images/options.png)
+
+**计划**：各阶段的规模、完成标准、回滚方式和可停止点。
+
+![计划](docs/images/plan.png)
+
+**手机端**：每个标签页都在 390 px 宽度下检查。
+
+![手机端](docs/images/mobile.png)
 
 ## 技能
 

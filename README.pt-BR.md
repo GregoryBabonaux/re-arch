@@ -2,6 +2,8 @@
 
 [English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | **Português** | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 
+![Relatório do re-arch: resumo e mapa de domínios](docs/images/banner.png)
+
 Uma suíte de agent skills que audita a arquitetura de uma aplicação existente, propõe arquiteturas-alvo dimensionadas pelo custo de entendê-las e de construí-las, planeja o refactoring, apresenta o caso para a gestão, enquadra os agentes de código com IA e a CI em torno do alvo escolhido e produz material de treinamento baseado no próprio código da equipe. Pensada para qualquer codebase, e especialmente para as vibe-coded ou geradas por IA.
 
 Ecossistemas suportados: JavaScript / TypeScript, PHP, .NET (C#), Java / Kotlin, C / C++, Go, Rust.
@@ -20,6 +22,26 @@ Rode `re-arch-audit` em um repositório e você obtém, em `.re-arch/`:
 - um **relatório HTML responsivo** reunindo tudo, validado contra o contrato de dados e verificado em largura de celular, imprimível em PDF, além de diagramas Mermaid para a documentação do repositório;
 - um **bundle [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2)** do conhecimento de arquitetura (sistema, domínios, sistemas externos, decisão, regras, roadmap, histórico), para commitar em `docs/architecture/okf/` para pessoas, agentes de código e catálogos de conhecimento; campos de confiança indicam o que a equipe validou, e conteúdo sensível fica de fora;
 - **re-auditorias** que mostram o que foi resolvido, o que é novo e como as métricas evoluíram.
+
+## Exemplo de relatório
+
+Gerado pelo re-arch sobre o *Factureo*, um app de faturamento fictício feito com vibe coding para as evals (o relatório está em francês). [Baixe o relatório completo](docs/example/report-factureo.html) e abra-o em um navegador.
+
+**Mapa de domínios**: domínios de negócio e suas dependências, dependências mútuas em laranja.
+
+![Mapa de domínios](docs/images/domain-map.png)
+
+**Opções**: de 2 a 4 arquiteturas-alvo, cada uma dimensionada em custo de compreensão e tamanho de implementação, avaliadas pelos cenários de qualidade do negócio.
+
+![Opções](docs/images/options.png)
+
+**Plano**: fases com tamanho, critérios de saída, rollback e pontos de parada.
+
+![Plano](docs/images/plan.png)
+
+**No celular**: cada aba é verificada com 390 px de largura.
+
+![No celular](docs/images/mobile.png)
 
 ## Skills
 

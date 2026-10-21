@@ -2,6 +2,8 @@
 
 [English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [Português](README.pt-BR.md) | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | **日本語**
 
+![re-arch レポート：サマリーとドメインマップ](docs/images/banner.png)
+
 既存アプリケーションのアーキテクチャを監査し、理解するコストと構築するコストで規模を見積もったターゲットアーキテクチャを提案し、リファクタリング (refactoring) を計画し、経営層向けの説明資料を作り、選んだターゲットに沿って AI コーディングエージェントと CI を整え、チーム自身のコードをもとにした研修教材を作成する、エージェントスキル (agent skill) のスイートです。あらゆるコードベースを対象に設計していますが、特にバイブコーディング (vibe coding) で作られたコードや AI が生成したコードベースを想定しています。
 
 対応エコシステム: JavaScript / TypeScript、PHP、.NET (C#)、Java / Kotlin、C / C++、Go、Rust。
@@ -20,6 +22,26 @@
 - すべてをまとめた**レスポンシブな HTML レポート**: データコントラクトに対して検証し、スマートフォン幅での表示も確認済みで、PDF として印刷できます。リポジトリのドキュメント用に Mermaid 図も出力します。
 - アーキテクチャの知識 (システム、ドメイン、外部システム、意思決定、ルール、ロードマップ、履歴) をまとめた **[Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2) バンドル**: `docs/architecture/okf/` にコミットし、人、コーディングエージェント、ナレッジカタログが利用できます。トラストフィールドがチームの検証済み内容を示し、機密情報は含めません。
 - **再監査**: 解決されたもの、新たに見つかったもの、メトリクスの変化を示します。
+
+## レポートの例
+
+評価用に作成した架空のバイブコーディング製請求書アプリ *Factureo* に対して re-arch が生成したものです（レポートはフランス語です）。[完全なレポートをダウンロード](docs/example/report-factureo.html)してブラウザで開いてください。
+
+**ドメインマップ**：業務ドメインとその依存関係。相互依存はオレンジで表示されます。
+
+![ドメインマップ](docs/images/domain-map.png)
+
+**オプション**：2〜4 つのターゲットアーキテクチャ。それぞれ理解コストと実装規模で見積もり、業務の品質シナリオに照らして評価します。
+
+![オプション](docs/images/options.png)
+
+**計画**：フェーズごとの規模、完了条件、ロールバック、停止ポイント。
+
+![計画](docs/images/plan.png)
+
+**スマートフォン**：すべてのタブを幅 390 px で確認しています。
+
+![スマートフォン](docs/images/mobile.png)
 
 ## スキル
 

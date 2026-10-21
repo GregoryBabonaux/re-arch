@@ -2,6 +2,8 @@
 
 [English](README.md) | **Français** | [Español](README.es.md) | [Deutsch](README.de.md) | [Português](README.pt-BR.md) | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 
+![Rapport re-arch : synthèse et carte des domaines](docs/images/banner.png)
+
 Une suite de skills pour agents qui audite l'architecture d'une application existante, propose des architectures cibles dimensionnées selon ce qu'elles coûtent à comprendre et à construire, planifie le refactoring, construit l'argumentaire pour la direction, encadre les agents de code IA et la CI autour de la cible retenue, et produit du matériel de formation construit sur le propre code de l'équipe. Conçue pour toute base de code, et en particulier pour les bases vibe-coded ou générées par IA.
 
 Écosystèmes supportés : JavaScript / TypeScript, PHP, .NET (C#), Java / Kotlin, C / C++, Go, Rust.
@@ -20,6 +22,26 @@ Lancez `re-arch-audit` sur un dépôt et vous obtenez, dans `.re-arch/` :
 - un **rapport HTML responsive** qui rassemble le tout, validé par rapport au contrat de données et vérifié en largeur mobile, imprimable en PDF, plus des diagrammes Mermaid pour la documentation du dépôt ;
 - un **bundle [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2)** de la connaissance d'architecture (système, domaines, systèmes externes, décision, règles, feuille de route, historique), à committer sous `docs/architecture/okf/` pour les humains, les agents de code et les catalogues de connaissance ; des champs de confiance indiquent ce que l'équipe a validé, et le contenu sensible en est exclu ;
 - des **re-audits** qui montrent ce qui a été résolu, ce qui est nouveau et comment les métriques ont évolué.
+
+## Exemple de rapport
+
+Généré par re-arch sur *Factureo*, une app de facturation vibe codée fictive écrite pour les évals. [Téléchargez le rapport complet](docs/example/report-factureo.html) et ouvrez-le dans un navigateur.
+
+**Carte des domaines** : domaines métier et leurs dépendances, dépendances mutuelles en orange.
+
+![Carte des domaines](docs/images/domain-map.png)
+
+**Options** : 2 à 4 cibles, chacune dimensionnée en coût de compréhension et en taille d'implémentation, évaluée au regard des scénarios de qualité du métier.
+
+![Options](docs/images/options.png)
+
+**Plan** : phases avec leur taille, leurs critères de sortie, le rollback et les points d'arrêt.
+
+![Plan](docs/images/plan.png)
+
+**Sur téléphone** : chaque onglet est vérifié à 390 px de large.
+
+![Sur téléphone](docs/images/mobile.png)
 
 ## Skills
 

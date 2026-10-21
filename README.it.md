@@ -2,6 +2,8 @@
 
 [English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [Português](README.pt-BR.md) | **Italiano** | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 
+![Report di re-arch: sintesi e mappa dei domini](docs/images/banner.png)
+
 Una suite di skill per agenti che analizza l'architettura di un'applicazione esistente, propone architetture target dimensionate in base a quanto costa comprenderle e realizzarle, pianifica il refactoring, presenta il caso al management, inquadra gli agenti di coding AI e la CI attorno al target scelto e produce materiale formativo basato sul codice del team stesso. Pensata per qualsiasi codebase, e in particolare per quelle vibe-coded o generate da AI.
 
 Ecosistemi supportati: JavaScript / TypeScript, PHP, .NET (C#), Java / Kotlin, C / C++, Go, Rust.
@@ -20,6 +22,26 @@ Esegui `re-arch-audit` su un repository e ottieni, in `.re-arch/`:
 - un **report HTML responsive** che raccoglie tutto, validato rispetto al contratto dati e verificato a larghezza smartphone, stampabile in PDF, più diagrammi Mermaid per la documentazione del repo;
 - un **bundle [Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2)** della conoscenza architetturale (sistema, domini, sistemi esterni, decisione, regole, roadmap, storico), da committare in `docs/architecture/okf/` per le persone, gli agenti di coding e i cataloghi di conoscenza; i campi di trust indicano cosa ha validato il team, e i contenuti sensibili restano fuori;
 - **ri-audit** che mostrano cosa è stato risolto, cosa è nuovo e come si sono mosse le metriche.
+
+## Esempio di report
+
+Generato da re-arch su *Factureo*, un'app di fatturazione fittizia scritta in vibe coding per le eval (il report è in francese). [Scarica il report completo](docs/example/report-factureo.html) e aprilo in un browser.
+
+**Mappa dei domini**: domini di business e loro dipendenze, dipendenze reciproche in arancione.
+
+![Mappa dei domini](docs/images/domain-map.png)
+
+**Opzioni**: da 2 a 4 architetture target, ciascuna dimensionata in costo di comprensione e dimensione di implementazione, valutate sugli scenari di qualità del business.
+
+![Opzioni](docs/images/options.png)
+
+**Piano**: fasi con dimensione, criteri di uscita, rollback e punti di arresto.
+
+![Piano](docs/images/plan.png)
+
+**Su smartphone**: ogni scheda è verificata a 390 px di larghezza.
+
+![Su smartphone](docs/images/mobile.png)
 
 ## Skill
 

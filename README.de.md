@@ -2,6 +2,8 @@
 
 [English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | **Deutsch** | [Português](README.pt-BR.md) | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
 
+![re-arch-Bericht: Zusammenfassung und Domänenkarte](docs/images/banner.png)
+
 Eine Suite von Agent-Skills, die die Architektur einer bestehenden Anwendung auditiert, Zielarchitekturen vorschlägt und danach bemisst, was sie an Verständnis und an Umsetzung kosten, das Refactoring plant, das Management überzeugt, KI-Coding-Agents und CI auf das gewählte Ziel ausrichtet und Schulungsmaterial auf Basis des eigenen Codes des Teams erstellt. Gedacht für jede Codebasis, insbesondere für vibe-coded oder KI-generierte.
 
 Unterstützte Ökosysteme: JavaScript / TypeScript, PHP, .NET (C#), Java / Kotlin, C / C++, Go, Rust.
@@ -20,6 +22,26 @@ Führe `re-arch-audit` auf einem Repository aus, und du erhältst in `.re-arch/`
 - einen **responsiven HTML-Bericht**, der alles bündelt, gegen den Datenvertrag validiert und in Smartphone-Breite geprüft, als PDF druckbar, dazu Mermaid-Diagramme für die Doku des Repos;
 - ein **[Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2) Bundle** des Architekturwissens (System, Domänen, externe Systeme, Entscheidung, Regeln, Roadmap, Historie), zum Committen unter `docs/architecture/okf/` für Menschen, Coding-Agents und Knowledge-Kataloge; Trust-Felder geben an, was das Team validiert hat, und sensible Inhalte bleiben außen vor;
 - **Re-Audits**, die zeigen, was behoben wurde, was neu ist und wie sich die Metriken entwickelt haben.
+
+## Beispielbericht
+
+Von re-arch erstellt für *Factureo*, eine fiktive, per Vibe Coding gebaute Rechnungs-App, die für die Evals geschrieben wurde (der Bericht ist auf Französisch). [Lade den vollständigen Bericht herunter](docs/example/report-factureo.html) und öffne ihn im Browser.
+
+**Domänenkarte**: fachliche Domänen und ihre Abhängigkeiten, gegenseitige Abhängigkeiten in Orange.
+
+![Domänenkarte](docs/images/domain-map.png)
+
+**Optionen**: 2 bis 4 Zielarchitekturen, jeweils nach Verständnisaufwand und Umsetzungsgröße bemessen und an den Qualitätsszenarien des Fachbereichs bewertet.
+
+![Optionen](docs/images/options.png)
+
+**Plan**: Phasen mit Größe, Abschlusskriterien, Rollback und Haltepunkten.
+
+![Plan](docs/images/plan.png)
+
+**Auf dem Smartphone**: jeder Tab wird bei 390 px Breite geprüft.
+
+![Auf dem Smartphone](docs/images/mobile.png)
 
 ## Skills
 
