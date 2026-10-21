@@ -379,14 +379,15 @@ class OKFExport(unittest.TestCase):
         json.dump(d, open(os.path.join(self.archi, "domains.json"), "w"))
 
     def fm(self, rel):
+        """Frontmatter as a dict with PyYAML, else the raw block (CI runners may not have PyYAML)."""
         txt = open(os.path.join(self.okf, rel), encoding="utf-8").read()
         self.assertTrue(txt.startswith("---\n"), rel)
         block = txt.split("---\n")[1]
         try:
             import yaml
-            return yaml.safe_load(block)
         except ImportError:
-            return {ln.split(":")[0]: ln for ln in block.splitlines()}
+            return block
+        return yaml.safe_load(block)
 
     def test_bundle_conformant_and_clean(self):
         r = run(TO_OKF, self.archi)
@@ -408,11 +409,15 @@ class OKFExport(unittest.TestCase):
         self.assertIn("Prisma client", everything)
         self.assertNotIn("A1", everything.replace("A1.", ""), "no knowledge-distribution pseudonyms")
         fm = self.fm("domains/orders.md")
-        if isinstance(fm.get("type"), str) and "generated" in fm:
+        if isinstance(fm, dict):
             self.assertEqual(fm["type"], "Business Domain")
             self.assertEqual(fm["status"], "draft")
             self.assertNotIn("verified", fm, "an unvalidated map is unverified")
             self.assertTrue(str(fm["generated"]["by"]).startswith("re-arch/"))
+        else:
+            for needle in ('type: "Business Domain"', 'status: "draft"', 'generated: { by: "re-arch/'):
+                self.assertIn(needle, fm)
+            self.assertNotIn("verified:", fm, "an unvalidated map is unverified")
 
     def test_team_validation_and_log_history(self):
         run(TO_OKF, self.archi)
