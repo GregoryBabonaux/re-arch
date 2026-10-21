@@ -1,0 +1,59 @@
+{
+  "skill_name": "re-arch-audit",
+  "notes": "End-to-end evals of the re-arch suite. Each case is graded by evals/grade.py (deterministic checks on .re-arch/) plus a human look at report.html. Run each case with the suite installed and without it (baseline) to measure what the suite adds.",
+  "evals": [
+    {
+      "id": 1,
+      "name": "vibe-coded-invoicing-fr",
+      "repo": "evals/repos/factureo.tar.gz (extract; includes git history)",
+      "prompt": "Salut, j'ai une app de facturation pour freelances (Factureo) qu'on a entièrement vibe codée avec Cursor en 3 mois. Ça marche mais chaque modif casse un truc, surtout la TVA et les statuts de paiement. Je voudrais un audit d'architecture complet avec un plan de refacto, de quoi convaincre mon associé (non tech) d'y consacrer du temps, et de quoi faire monter en compétence nos 2 devs juniors.",
+      "expected_output": "French deliverables. Planted issues found: Stripe live key in src/utils/utils.ts, webhook without signature check, DELETE without auth or ownership check, VAT/total computed in several places (utils.ts, invoices/new/page.tsx), overdue computed in several places, two date libraries (moment + date-fns), two API clients (api.ts + api2.ts), near-duplicate InvoiceCard/InvoiceCardNew, money as Float, users->clients/invoices cycle. Options include a light one; recommendation is not hexagonal for 2 juniors. Plan starts with security quick wins and characterisation tests. Pitch has a do-nothing option and no jargon.",
+      "files": [],
+      "assertions": [
+        {"id": "valid", "text": "validate.py reports 0 error"},
+        {"id": "lang", "text": "meta.lang is fr"},
+        {"id": "secret", "text": "a critical or high finding cites src/utils/utils.ts for the hard-coded Stripe key"},
+        {"id": "webhook", "text": "a finding cites src/app/api/webhooks/stripe/route.ts (signature not verified)"},
+        {"id": "vat-dup", "text": "a finding cites both src/utils/utils.ts and src/app/invoices/new/page.tsx (VAT/total rule duplicated)"},
+        {"id": "hygiene", "text": "a finding mentions two date libraries or two HTTP/API clients"},
+        {"id": "light", "text": "options include a light option and the recommended option is not clean/hexagonal/onion everywhere"},
+        {"id": "safety-net", "text": "the first two phases contain characterisation tests"},
+        {"id": "do-nothing", "text": "pitch.options contains a do-nothing option"},
+        {"id": "non-findings", "text": "findings.json has at least one non_finding"},
+        {"id": "render", "text": "check_render.py passes at 390px and 1280px"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "healthy-crud-keep-architecture",
+      "repo": "https://github.com/spring-projects/spring-petclinic at 500158f732419217507c7656904b8e6aa1bcc0d6",
+      "prompt": "We maintain this Spring Boot app (it's spring-petclinic, our team of 3 uses it as the base of a small clinic management tool). A consultant told us we should move to hexagonal architecture. Can you audit the architecture and tell us honestly whether that's worth it?",
+      "expected_output": "Honest outcome: the codebase is small, consistent and CRUD-heavy. The recommended option is light (keep the current layered/package-by-feature structure with targeted fixes); hexagonal is either an option that is not recommended or explicitly rejected with reasons tied to the code. Few high/critical findings. Strengths and non-findings are substantial.",
+      "files": [],
+      "assertions": [
+        {"id": "valid", "text": "validate.py reports 0 error"},
+        {"id": "no-hexa-reco", "text": "the recommended option does not include clean, hexagonal or onion styles"},
+        {"id": "hexa-addressed", "text": "hexagonal appears in options (not recommended) or in rejected, with a reason"},
+        {"id": "few-severe", "text": "at most 2 critical/high findings"},
+        {"id": "strengths", "text": "at least 3 strengths and 2 non_findings"},
+        {"id": "small-plan", "text": "no phase sized XL"}
+      ]
+    },
+    {
+      "id": 3,
+      "name": "framework-convention-laravel-en",
+      "repo": "https://github.com/gothinkster/laravel-realworld-example-app (default branch)",
+      "prompt": "We inherited this Laravel API (it's the RealWorld/Conduit example app, our team of 4 mid-level PHP devs forked it as the base of our product and is adding features to it). Before we pile more features on top, can you assess its architecture and tell us what structure we should move to, with a refactoring roadmap and architecture rules we can enforce in CI?",
+      "expected_output": "Domains derived from routes and entities (articles, comments, profiles/follows, favorites, users/auth). Framework upgrade identified as a prerequisite common to all options. Recommendation is Laravel-idiomatic layering by domain, not hexagonal. Guardrails adopt a frozen baseline and include a Pest arch / deptrac config tied to the upgrade phase plus the generic checker.",
+      "files": [],
+      "assertions": [
+        {"id": "valid", "text": "validate.py reports 0 error"},
+        {"id": "domains", "text": "domains.json contains at least 4 domains including articles and comments"},
+        {"id": "prereq", "text": "options.prerequisites mentions the framework/PHP upgrade"},
+        {"id": "no-hexa-reco", "text": "the recommended option does not include clean, hexagonal or onion styles everywhere"},
+        {"id": "baseline", "text": "guardrails.json adoption mentions a baseline"},
+        {"id": "render", "text": "check_render.py passes"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,81 @@
+# re-arch
+
+A suite of agent skills that audits the architecture of an existing application, proposes target architectures sized by what they cost to understand and to build, plans the refactoring, makes the case to management, frames AI coding agents and CI around the chosen target, and produces training material built on the team's own code. Designed for any codebase, and especially for vibe-coded or AI-generated ones.
+
+Supported ecosystems: JavaScript / TypeScript, PHP, .NET (C#), Java / Kotlin, C / C++, Go, Rust.
+
+## What you get
+
+Run `re-arch-audit` on a repository and you get, in `.re-arch/`:
+
+- a **domain map** of the application (business areas, dependencies, external systems as a C4 context view, fuzzy zones, confidence per domain), even when the folder structure means nothing;
+- a **diagnosis** where every finding cites files and lines, with its impact for the team and for the business and its fix size, plus the strengths to keep, **what looks bad but is fine**, and open questions for the maintainers;
+- **2 to 4 target options** (from "targeted refactoring, same structure" to layered, vertical slices, modular monolith, clean / hexagonal, CQRS or event sourcing when the code justifies them), each sized in **understanding cost** and **implementation size** (S, M, L, XL), scored against the business's **quality scenarios**, possibly different per domain, with the styles considered and rejected;
+- a **phased refactoring plan** in T-shirt sizes with explicit criteria: safety net of characterisation tests first, steps with a `verify` command, exit gates, rollback, stop points, and coverage of every critical and high finding;
+- a **pitch for management**: risks, options including doing nothing, investment as a capacity range with its derivation, milestones, indicators, decision requested;
+- **guardrails**: root and per-domain AGENTS.md, a project skill telling agents where new code goes, an **agent hook** that runs the architecture check in the agent's own turn, fitness functions for CI adopted with a **frozen baseline** (native tools per ecosystem plus a language-agnostic checker), an ADR (MADR 4), a review checklist;
+- an **academy**: a learning path aligned with the plan, modules anchored in real files of the repo (before/after, katas, review questions), curated reading;
+- a **responsive HTML report** gathering everything, validated against the data contract and checked at phone width, printable to PDF, plus Mermaid diagrams for the repo's docs;
+- an **[Open Knowledge Format](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md) (OKF v0.2) bundle** of the architecture knowledge (system, domains, external systems, decision, rules, roadmap, history), to commit under `docs/architecture/okf/` for people, coding agents and knowledge catalogs; trust fields say what the team validated, and sensitive content stays out;
+- **re-audits** that show what was resolved, what is new and how the metrics moved.
+
+## Skills
+
+| Skill | Role | Scripts |
+|---|---|---|
+| `re-arch-audit` | orchestrator, checkpoints for domain validation and option choice, re-audit mode | `diff_rearch.py` |
+| `re-arch-scan` | dependency graph (compiler-grade when possible), DI wiring, build units, coupling, cycles, hotspots, co-change, knowledge distribution, duplication, data model, routes, external systems, dependency hygiene, secrets | `scan.py`, `precise.py`, `di.py`, `insights.py`, `ts_resolve.js`, `php_refs.php` |
+| `re-arch-domains` | business domains from imports + DI + co-change + data model + routes | `cluster.py` (Louvain) |
+| `re-arch-diagnose` | findings with evidence, severity and fix size; smell catalog with "do not flag" lists | |
+| `re-arch-options` | target architectures, two-axis sizing, quality scenarios, rationalization table, style catalog, ecosystem idioms | |
+| `re-arch-plan` | phased plan, verifiable steps, exit gates, incremental techniques | `plan_to_md.py` |
+| `re-arch-pitch` | management case | `pitch_to_md.py` |
+| `re-arch-guardrails` | agent rules, project skill, agent hooks, fitness functions with baseline, ADR | `check_architecture.py` (+ vendored scanner) |
+| `re-arch-academy` | training material on the team's own code | |
+| `re-arch-report` | HTML report, contract validation, rendering check, Mermaid and OKF export | `render.py`, `validate.py`, `check_render.py`, `to_okf.py` |
+
+Each skill also works alone. They exchange data through JSON files in `.re-arch/`; the contract is in `skills/re-arch-audit/references/contract.md` and is enforced by `validate.py`.
+
+## How precise is the dependency graph?
+
+The scan uses the language's own tools when they are available and says so in its "Graph sources" section; otherwise it falls back to regex resolution.
+
+| Ecosystem | Precise source | Needs |
+|---|---|---|
+| C/C++ | `compile_commands.json` (real `-I`/`-D`) + preprocessor include tree | a compile database (CMake `-DCMAKE_EXPORT_COMPILE_COMMANDS=ON`, `bear`), a compiler |
+| Go | `go list` (build tags, exact module paths) | Go toolchain |
+| Rust | `cargo metadata` (crate graph, cross-crate `use`) | Cargo |
+| Java/Kotlin | `jdeps` on compiled classes | a JDK and a built project |
+| .NET | `.csproj` ProjectReference graph (prunes impossible edges) | nothing |
+| JS/TS | TypeScript's own module resolver | `typescript` in the repo, or `--fetch-tools` |
+| PHP | PHP tokenizer with full name resolution | a `php` binary |
+
+Dependency injection is resolved separately (.NET registrations, NestJS/Angular providers, Laravel bindings and facades, Symfony services, Spring `@Bean`, Google Wire, single implementations) into **runtime edges**, kept apart from imports: layering rules use imports, coupling and domains use both. Reflection and convention-based scanning remain invisible, and every report says so.
+
+## Design choices
+
+- **Evidence before opinion**: a deterministic scan runs first; findings point to code, and the diagnosis shows what it chose not to flag.
+- **No architecture by default**: a light option is always on the table, every option must be justified by signals in the code and scored against quality scenarios, and clean, hexagonal and onion are one option, not levels of quality. "Keep the current architecture" is a legitimate outcome.
+- **Cost is visible**: understanding cost next to implementation size.
+- **Sizes, not days**: T-shirt sizes with explicit criteria; XL means "split it"; management gets capacity ranges with their derivation.
+- **Two audiences**: tech gets evidence and verifiable steps, management gets risks and decisions.
+- **Refactoring that sticks**: frozen-baseline fitness functions, agent hooks, per-domain agent rules, training on the repo, re-audits.
+- **People are not findings**: knowledge concentration is reported with pseudonyms (`A1`, `A2`), the mapping stays local.
+
+## Requirements
+
+- Python 3.8+ (standard library only for the core).
+- Optional, for precise mode: the language toolchains above; Node for the TypeScript resolver.
+- Optional: Playwright + Chromium to check the report rendering (`pip install playwright && python -m playwright install chromium`).
+- Optional: git history in the audited repo (co-change, hotspots, knowledge; avoid shallow clones).
+
+## Install
+
+Copy the folders under `skills/` into your agent's skills directory (for example `~/.claude/skills/` or `<repo>/.claude/skills/`), or upload the `.skill` packages. Then ask for an architecture audit of a repository, or invoke `/re-arch-audit`.
+
+## Development
+
+- `python3 tests/test_suite.py -v`: 34 tests on fixture repositories per ecosystem. Each fixture plants traps the regex layer gets wrong (macro-computed includes, include-dir collisions, cross-crate `use`, inline qualified names, namespace collisions across projects, build tags, same-namespace PHP references) and checks that the precise layer and the DI extraction get them right; plus checker baseline and hooks, contract validation, rendering at phone width, re-audit diffs, OKF export (conformance, trust fields, log history, nothing sensitive). Toolchain-dependent tests are skipped when the toolchain is missing.
+- `python3 tools/sync.py` after changing the scanner (the guardrails skill vendors a copy); `--check` in CI.
+- `evals/`: end-to-end evals (`evals.json`, graded by `evals/grade.py`) including a healthy repository where the right answer is "do not move to hexagonal", and trigger queries for the skill descriptions (`triggers.json`).
+- `.github/workflows/tests.yml` runs all of it.

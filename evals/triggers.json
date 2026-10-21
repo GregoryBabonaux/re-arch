@@ -1,0 +1,22 @@
+[
+  {"skill": "re-arch-audit", "should_trigger": true, "query": "on a une app next.js entièrement générée avec cursor et lovable, ça devient ingérable, tu peux me dire ce qui cloche dans l'archi et comment on remet ça d'équerre sans tout réécrire ?"},
+  {"skill": "re-arch-audit", "should_trigger": true, "query": "Can you assess the architecture of our Laravel monolith in ./api and propose a refactoring roadmap? My CTO wants to know if it's worth investing a quarter in it"},
+  {"skill": "re-arch-audit", "should_trigger": true, "query": "our .NET solution (src/Billing.sln) has grown to 40 projects and nobody knows what depends on what anymore. I need a tech debt assessment and a plan to present to the board"},
+  {"skill": "re-arch-audit", "should_trigger": true, "query": "est-ce que notre code go respecte une archi correcte ? on hésite entre clean archi et rester simple, et je veux des règles à mettre en CI pour que les devs (et claude) arrêtent de mettre du SQL partout"},
+  {"skill": "re-arch-audit", "should_trigger": true, "query": "refais l'audit d'archi de factureo, on a fini la phase P1 du plan, je veux voir ce qui a bougé depuis le mois dernier"},
+  {"skill": "re-arch-domains", "should_trigger": true, "query": "I just joined a team with a 200k-line Rust workspace and no docs. Can you map the business domains and show me how they depend on each other?"},
+  {"skill": "re-arch-guardrails", "should_trigger": true, "query": "we picked a modular monolith for our Spring Boot app last month but the AI agents keep importing other modules' internals. set up rules for the agents and ArchUnit tests in CI"},
+  {"skill": "re-arch-pitch", "should_trigger": true, "query": "j'ai déjà le plan de refacto dans .re-arch/plan.json, écris-moi la note pour convaincre notre DG (aucune culture tech) de nous donner 2 sprints"},
+  {"skill": "re-arch-academy", "should_trigger": true, "query": "my two junior devs need to learn how to move business rules out of our React components and API routes. can you build training material from our actual codebase?"},
+  {"skill": "re-arch-scan", "should_trigger": true, "query": "give me the dependency graph, import cycles and hotspots of this C++ repo, we have a compile_commands.json in build/"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "review this PR diff for bugs before I merge it: it changes the retry logic in src/http/client.ts"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "write an ADR explaining why we chose Kafka over RabbitMQ for our event bus, the decision is already made"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "explique-moi la différence entre clean architecture et architecture hexagonale, avec un exemple simple en TypeScript"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "design the architecture for a new SaaS we're starting from scratch next week: multi-tenant, Next.js + Postgres, what should the folder structure be?"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "fix the failing test in tests/orders.test.ts, it says expected 10 got 9.5"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "do a security audit of our auth flow: JWT handling, password reset, session fixation"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "refactor this function to be more readable, it's 80 lines of nested ifs: [code]"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "draw me an AWS architecture diagram for a web app with ALB, ECS and RDS"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "our kubernetes cluster costs too much, can you review the resource requests in charts/ and suggest cuts?"},
+  {"skill": "re-arch-audit", "should_trigger": false, "query": "set up eslint and prettier for our monorepo with consistent rules across packages"}
+]
