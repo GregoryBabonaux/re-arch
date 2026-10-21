@@ -1,5 +1,7 @@
 # re-arch
 
+**English** | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [Português](README.pt-BR.md) | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
+
 A suite of agent skills that audits the architecture of an existing application, proposes target architectures sized by what they cost to understand and to build, plans the refactoring, makes the case to management, frames AI coding agents and CI around the chosen target, and produces training material built on the team's own code. Designed for any codebase, and especially for vibe-coded or AI-generated ones.
 
 Supported ecosystems: JavaScript / TypeScript, PHP, .NET (C#), Java / Kotlin, C / C++, Go, Rust.

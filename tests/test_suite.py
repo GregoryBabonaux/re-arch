@@ -470,6 +470,11 @@ if __name__ == "__main__":
     try:
         prog = unittest.main(verbosity=2 if "-v" in sys.argv else 1, exit=False, warnings="ignore")
         ok = prog.result.wasSuccessful()
+        if os.environ.get("GITHUB_ACTIONS"):
+            # one annotation per failure, readable in the run summary and through the API
+            for test, tb in prog.result.failures + prog.result.errors:
+                tail = "\n".join(tb.strip().splitlines()[-12:])
+                print(f"::error title={test.id()}::" + tail.replace("%", "%25").replace("\r", "").replace("\n", "%0A"))
     finally:
         shutil.rmtree(TMP, ignore_errors=True)
     sys.exit(0 if ok else 1)
