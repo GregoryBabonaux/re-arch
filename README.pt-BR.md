@@ -1,6 +1,6 @@
 # re-arch
 
-[English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | **Português** | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md)
+[English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | **Português** | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | [日本語](README.ja.md) · **[Site](https://gregorybabonaux.github.io/re-arch/?lang=pt)**
 
 ![Relatório do re-arch: resumo e mapa de domínios](docs/images/banner.png)
 

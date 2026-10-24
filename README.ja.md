@@ -1,6 +1,6 @@
 # re-arch
 
-[English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [Português](README.pt-BR.md) | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | **日本語**
+[English](README.md) | [Français](README.fr.md) | [Español](README.es.md) | [Deutsch](README.de.md) | [Português](README.pt-BR.md) | [Italiano](README.it.md) | [简体中文](README.zh-CN.md) | **日本語** · **[ウェブサイト](https://gregorybabonaux.github.io/re-arch/?lang=ja)**
 
 ![re-arch レポート：サマリーとドメインマップ](docs/images/banner.png)
 

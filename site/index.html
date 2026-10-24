@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>re-arch: an architecture audit your team can act on</title>
+<meta name="description" content="Agent skills that audit the architecture of an existing codebase, vibe-coded ones included: business domains, findings cited by file and line, 2 to 4 sized target architectures, a refactoring plan, a pitch for management and guardrails for AI agents.">
+<meta property="og:title" content="re-arch: an architecture audit your team can act on">
+<meta property="og:description" content="Domains, findings cited by line, sized target architectures, a refactoring plan and guardrails for AI agents. Never hexagonal by default.">
+<meta property="og:image" content="https://raw.githubusercontent.com/GregoryBabonaux/re-arch/main/docs/images/banner.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,650;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<a class="skip" href="#main" data-i18n="skip">Skip to content</a>
+
+<header class="top">
+  <a class="brand" href="./" aria-label="re-arch home"><span class="mark" aria-hidden="true"></span>re<span class="dash">-</span>arch</a>
+  <nav aria-label="Sections">
+    <a href="#how" data-i18n="nav.how">How it works</a>
+    <a href="#options" data-i18n="nav.options">Options</a>
+    <a href="#guardrails" data-i18n="nav.guard">Guardrails &amp; OKF</a>
+    <a href="#install" data-i18n="nav.install">Install</a>
+    <a href="https://github.com/GregoryBabonaux/re-arch">GitHub</a>
+    <label class="lang"><span class="visually-hidden" data-i18n="lang">Language</span>
+      <select id="lang">
+        <option value="en">English</option>
+        <option value="fr">Français</option>
+        <option value="es">Español</option>
+        <option value="de">Deutsch</option>
+        <option value="pt">Português</option>
+        <option value="it">Italiano</option>
+        <option value="zh">简体中文</option>
+        <option value="ja">日本語</option>
+      </select>
+    </label>
+  </nav>
+</header>
+
+<main id="main">
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="hero-copy">
+    <h1 id="hero-title" data-i18n="hero.title">An architecture audit your team can act on.</h1>
+    <p class="lede" data-i18n="hero.lede">re-arch gives your coding agent the skills to map the business domains of an existing app, cite every weakness by file and line, weigh target architectures by what they cost to understand and to build, then plan the refactoring. Vibe-coded apps included.</p>
+    <div class="cta">
+      <div class="cmd" data-copy>
+        <code>npx skills add GregoryBabonaux/re-arch</code>
+        <button type="button" class="copy" data-i18n="copy">Copy</button>
+      </div>
+      <a class="ghost" href="#install" data-i18n="hero.other">Claude Code plugin</a>
+    </div>
+    <p class="agents" data-i18n="hero.agents">Audits JavaScript / TypeScript, PHP, .NET, Java / Kotlin, C / C++, Go and Rust. Works with Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and any agent that reads <code>SKILL.md</code>.</p>
+  </div>
+
+  <figure class="demo">
+    <div class="code" role="group" aria-label="Two files of the audited app">
+      <p class="file">src/server/invoicing/rules/vat.ts</p>
+      <pre><code><span class="ln" data-line="v1"><i>1</i>export function vat(ht: number, country: string) {</span>
+<span class="ln" data-line="v2"><i>2</i>  return country === 'FR' ? <b>ht * 0.2</b> : 0</span>
+<span class="ln" data-line="v3"><i>3</i>}</span></code></pre>
+      <p class="file sep">src/app/invoices/new/page.tsx</p>
+      <pre><code><span class="ln" data-line="p4"><i>4</i>  const [ht, setHt] = useState(0)</span>
+<span class="ln" data-line="p5"><i>5</i>  const ttc = <b>ht * 1.2</b></span>
+<span class="ln" data-line="p6"><i>6</i>  return &lt;p&gt;{ttc}&lt;/p&gt;</span></code></pre>
+    </div>
+    <div class="card">
+      <p class="rid">F4 · duplication · <span class="sev" data-i18n="card.sev">high</span> · <span data-i18n="card.fix">fix S</span></p>
+      <h2 class="rule-title" data-i18n="card.title">VAT is computed twice, with two different rules</h2>
+      <p class="ctx" data-i18n="card.ctx">The server applies the client's country; the invoice form always adds 20&nbsp;%. <span class="win">The total shown can differ from the total invoiced.</span></p>
+      <ul class="proof">
+        <li><button type="button" data-hl="v2" data-i18n="card.v2">vat.ts:2 rate by country</button></li>
+        <li><button type="button" data-hl="p5" data-i18n="card.p5">page.tsx:5 always 20&nbsp;%</button></li>
+      </ul>
+      <p class="question" data-i18n="card.fixline">Plan: phase P2 keeps one pure function, with characterisation tests first.</p>
+    </div>
+    <figcaption data-i18n="demo.caption">Point at a piece of evidence to see the line it cites.</figcaption>
+  </figure>
+</section>
+
+<section class="shots" aria-labelledby="shots-title">
+  <h2 id="shots-title" data-i18n="shots.title">One report for the developers and for the board</h2>
+  <p class="section-lede" data-i18n="shots.lede">A single HTML file that opens offline, reads on a phone and prints to PDF. The summary speaks to management; every finding takes developers to the line.</p>
+  <div class="shot-main">
+    <img src="https://raw.githubusercontent.com/GregoryBabonaux/re-arch/main/docs/images/banner.png" alt="The report: summary with key figures, and the domain map on a phone" loading="lazy" width="1600" height="800">
+  </div>
+  <div class="shot-pair">
+    <figure>
+      <img src="https://raw.githubusercontent.com/GregoryBabonaux/re-arch/main/docs/images/options.png" alt="Options scored against quality scenarios, each with its understanding cost and implementation size" loading="lazy" width="1080" height="920">
+      <figcaption data-i18n="shots.options">Options scored against what the business needs, each with its two sizes.</figcaption>
+    </figure>
+    <figure>
+      <img src="https://raw.githubusercontent.com/GregoryBabonaux/re-arch/main/docs/images/plan.png" alt="The refactoring plan: phases with size, exit criteria, rollback and stop points" loading="lazy" width="1080" height="1040">
+      <figcaption data-i18n="shots.plan">A plan in phases: size, exit criteria, rollback, safe stop points.</figcaption>
+    </figure>
+  </div>
+  <p class="note" data-i18n="shots.note">Screenshots from Factureo, a fictional vibe-coded invoicing app written for the evals. The sample report is in French; yours follows the language you write in. <a href="https://github.com/GregoryBabonaux/re-arch/blob/main/docs/example/report-factureo.html">Download the full report</a>.</p>
+</section>
+
+<section class="how" id="how" aria-labelledby="how-title">
+  <h2 id="how-title" data-i18n="how.title">Evidence first, opinions after</h2>
+  <ol class="levels">
+    <li>
+      <h3 data-i18n="l1.title">Scan and map</h3>
+      <p data-i18n="l1.text">A deterministic scan builds the dependency graph with the compiler's own tools when they are there, adds dependency injection, git co-change and the data model, then groups the code into business domains.</p>
+      <code>re-arch-scan · re-arch-domains</code>
+    </li>
+    <li>
+      <h3 data-i18n="l2.title">Diagnose</h3>
+      <p data-i18n="l2.text">Every finding cites files and lines, with its impact for the team and for the business and its fix size. The diagnosis also lists what looks bad but is fine, and the questions only the maintainers can answer.</p>
+      <code>re-arch-diagnose</code>
+    </li>
+    <li>
+      <h3 data-i18n="l3.title">Choose and plan</h3>
+      <p data-i18n="l3.text">2 to 4 target options, then a phased plan for the one you keep: characterisation tests first, verifiable steps, exit criteria, rollback, and a pitch for management that includes doing nothing.</p>
+      <code>re-arch-options · re-arch-plan · re-arch-pitch</code>
+    </li>
+  </ol>
+  <div class="ongoing">
+    <p data-i18n="ongoing.guard"><strong>So it sticks,</strong> <code>re-arch-guardrails</code> writes the rules for AI agents, an agent hook and CI checks with a frozen baseline, and <code>re-arch-academy</code> turns the findings into training modules built on your own files.</p>
+    <p data-i18n="ongoing.reaudit"><strong>Months later,</strong> run the audit again: the report shows what was resolved, what is new, and how the metrics moved.</p>
+  </div>
+</section>
+
+<section class="opts" id="options" aria-labelledby="opts-title">
+  <div class="opts-copy">
+    <h2 id="opts-title" data-i18n="opts.title">Never hexagonal by default</h2>
+    <p data-i18n="opts.text">Each option is sized on two axes: what it costs your team to understand, and what it costs to build. A light option is always on the table, each one must be justified by signals in the code, and "keep the current structure, fix these findings" is a legitimate verdict.</p>
+    <p data-i18n="opts.petclinic">On Spring Petclinic, a healthy codebase, re-arch recommends targeted fixes and explains why hexagonal would cost more than it brings.</p>
+  </div>
+  <div class="matrix" role="group" aria-label="Three options compared">
+    <div class="mrow mhead"><span data-i18n="m.option">Option</span><span data-i18n="m.understand">Understand</span><span data-i18n="m.build">Build</span></div>
+    <div class="mrow"><span data-i18n="m.o1">Targeted fixes, same structure</span><span class="size s1">S</span><span class="size s2">M</span></div>
+    <div class="mrow pick"><span><span data-i18n="m.o2">Isolated invoicing core, thin routes</span> <em data-i18n="m.reco">recommended</em></span><span class="size s2">M</span><span class="size s3">L</span></div>
+    <div class="mrow"><span data-i18n="m.o3">Hexagonal for invoicing and payments</span><span class="size s3">L</span><span class="size s3">L</span></div>
+    <p class="mnote" data-i18n="m.note">Factureo: two junior developers, so understanding cost weighs as much as the code.</p>
+  </div>
+</section>
+
+<section class="proofs" aria-labelledby="proofs-title">
+  <h2 id="proofs-title" data-i18n="proofs.title">Tested on three very different codebases</h2>
+  <p class="section-lede" data-i18n="proofs.lede">A vibe-coded Next.js app full of traps, a healthy Spring project and a legacy Laravel API, each graded with deterministic checks.</p>
+  <dl class="figures">
+    <div><dt data-i18n="fig1">Graded checks passed</dt><dd><span class="to">23 / 23</span></dd></div>
+    <div><dt data-i18n="fig2">Ecosystems with compiler-grade graphs</dt><dd><span class="to">7</span></dd></div>
+    <div><dt data-i18n="fig3">Automated tests on fixture repos</dt><dd><span class="to">34</span></dd></div>
+  </dl>
+  <p class="note" data-i18n="proofs.note">October 2026. An audit takes about twice as long as a plain prompt, the price of the scan and the checks. Details in <a href="https://github.com/GregoryBabonaux/re-arch/tree/main/evals">evals/</a>.</p>
+</section>
+
+<section class="data" id="guardrails" aria-labelledby="guard-title">
+  <div>
+    <h2 id="guard-title" data-i18n="guard.title">AI agents keep to the plan</h2>
+    <p data-i18n="guard.text">AGENTS.md files say where new code goes and point to the cleanest examples in your repo. An agent hook runs the architecture check at the end of the agent's own turn and sends it back to fix what it broke. Existing debt sits in a baseline that can only shrink.</p>
+    <pre class="okf hook"><code><span class="dim">$ check_architecture.py --hook</span>
+Architecture check: 1 violation(s). Fix them before
+finishing (move the code, do not silence the rule):
+- src/app/invoices/new/page.tsx:5: ui contains
+  `* 1.2` [R2]. Why: VAT is computed once, in
+  src/server/invoicing/rules/</code></pre>
+  </div>
+  <div>
+    <h2 data-i18n="okf.title">Architecture knowledge other tools can read</h2>
+    <p data-i18n="okf.text">The audit is also exported as an <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf">Open Knowledge Format</a> bundle: one Markdown file per domain, external system, rule and decision, to commit next to the code. It says what the team validated, and leaves out anything sensitive.</p>
+    <pre class="okf"><code>---
+type: "Business Domain"
+title: "Invoicing"
+status: "stable"
+generated: { by: "re-arch/1.0", at: "2026-10-19T00:00:00Z" }
+verified: { by: "human:team", at: "2026-10-19T00:00:00Z" }
+stale_after: "2027-02-16T00:00:00Z"
+---</code></pre>
+  </div>
+</section>
+
+<section class="install" id="install" aria-labelledby="install-title">
+  <h2 id="install-title" data-i18n="install.title">Install</h2>
+  <div class="tabs" role="tablist">
+    <button type="button" role="tab" id="t-any" aria-controls="p-any" aria-selected="true" data-i18n="tab.any">Any agent</button>
+    <button type="button" role="tab" id="t-claude" aria-controls="p-claude" aria-selected="false" tabindex="-1" data-i18n="tab.claude">Claude Code plugin</button>
+  </div>
+  <div class="panel" role="tabpanel" id="p-any" aria-labelledby="t-any">
+    <p data-i18n="p.any">Skills for Codex, Cursor, Gemini CLI, Copilot and the rest, in the project or globally with <code>-g</code>.</p>
+    <div class="cmd" data-copy><code>npx skills add GregoryBabonaux/re-arch</code><button type="button" class="copy" data-i18n="copy">Copy</button></div>
+  </div>
+  <div class="panel" role="tabpanel" id="p-claude" aria-labelledby="t-claude" hidden>
+    <p data-i18n="p.claude">One step on Claude Code 2.1.275 or later.</p>
+    <div class="cmd" data-copy><code>/plugin install re-arch --marketplace GregoryBabonaux/re-arch</code><button type="button" class="copy" data-i18n="copy">Copy</button></div>
+    <p data-i18n="p.older">Older versions: add the marketplace, then install.</p>
+    <div class="cmd" data-copy><code>/plugin marketplace add GregoryBabonaux/re-arch</code><button type="button" class="copy" data-i18n="copy">Copy</button></div>
+    <div class="cmd" data-copy><code>/plugin install re-arch@re-arch</code><button type="button" class="copy" data-i18n="copy">Copy</button></div>
+  </div>
+  <div class="then">
+    <p data-i18n="then.1">Then, in the project to audit, ask your agent: <em>“Audit the architecture of this repository.”</em></p>
+    <p data-i18n="then.2">Python 3.8 or later. The language toolchains (compiler, Go, Cargo, JDK, Node, PHP) make the graph exact when they are installed; without them, the scan falls back to regex resolution and says so.</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="foot">
+  <p data-i18n="foot">Open source, by Grégory Babonaux. Reports and data stay in your repository.</p>
+  <p class="links">
+    <a href="https://github.com/GregoryBabonaux/re-arch">GitHub</a>
+    <a href="https://gregorybabonaux.github.io/rulebook/">rulebook</a>
+    <a id="readme" href="https://github.com/GregoryBabonaux/re-arch#readme" data-i18n="readme">README</a>
+  </p>
+</footer>
+
+<script src="i18n.js" defer></script>
+<script src="site.js" defer></script>
+</body>
+</html>
