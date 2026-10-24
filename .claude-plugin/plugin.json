@@ -14,5 +14,6 @@
     "fitness-functions",
     "skills"
   ],
-  "homepage": "https://gregorybabonaux.github.io/re-arch/"
+  "homepage": "https://gregorybabonaux.github.io/re-arch/",
+  "license": "MIT"
 }
